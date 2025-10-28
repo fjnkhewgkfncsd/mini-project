@@ -6,6 +6,12 @@ class Appointment {
   final String reason;
   final String status;
 
+  static const String scheduled = 'scheduled';
+  static const String confirmed = 'confirmed';
+  static const String inProgress = 'in_progress';
+  static const String completed = 'completed';
+  static const String cancelled = 'cancelled';
+
   Appointment({
     required this.id,
     required this.patientId,
@@ -21,7 +27,7 @@ class Appointment {
     String? doctorId,
     DateTime? dateTime,
     String? reason,
-    String? status
+    String? status,
   }) {
     return Appointment(
       id: id ?? this.id,
@@ -31,5 +37,13 @@ class Appointment {
       reason: reason ?? this.reason,
       status: status ?? this.status,
     );
+  }
+  bool get isUpcoming => status == scheduled && dateTime.isAfter(DateTime.now());
+  bool get isCompleted => status == completed;
+  bool get isCancelled => status == cancelled;
+  // AI
+  String get displayInfo => 'Appointment on ${_formatDate(dateTime)}';
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
   }
 }
