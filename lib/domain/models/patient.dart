@@ -13,7 +13,6 @@ class Patient {
     required this.gender,
     required this.phoneNumber,
     required this.medicalHistory,
-
   });
 
   Patient info({
@@ -33,4 +32,7 @@ class Patient {
       medicalHistory: medicalHistory ?? this.medicalHistory,
     );
   }
+
+  bool get isMinor => age < 18;
+  String get displayInfo => '$name, $age years old';
 }

@@ -4,7 +4,7 @@ class Doctor {
   final String specialization;
   final int phoneNumber;
   final String email;
-  final int yearOfExperience;
+  final int yearsOfExperience;
   final String department;
 
   Doctor({
@@ -13,7 +13,7 @@ class Doctor {
     required this.specialization,
     required this.phoneNumber,
     required this.email,
-    required this.yearOfExperience,
+    required this.yearsOfExperience,
     required this.department,
   });
 
@@ -23,7 +23,7 @@ class Doctor {
     String? specialization,
     int? phoneNumber,
     String? email,
-    int? yearOfExperience,
+    int? yearsOfExperience,
     String? department,
   }) {
     return Doctor(
@@ -32,8 +32,10 @@ class Doctor {
       specialization: specialization ?? this.specialization,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       email: email ?? this.email,
-      yearOfExperience: yearOfExperience ?? this.yearOfExperience,
+      yearsOfExperience: yearsOfExperience ?? this.yearsOfExperience,
       department: department ?? this.department,
     );
   }
+  String get displayInfo => 'Dr. $name - $specialization';
+  bool get isSenior => yearsOfExperience >= 10;
 }
