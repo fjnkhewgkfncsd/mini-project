@@ -4,7 +4,7 @@ class Patient {
   final int age;
   final String gender;
   final int phoneNumber;
-  final String medicalHistory;
+  final String medicalHistory;//list<String>
 
   Patient({
     required this.id,
