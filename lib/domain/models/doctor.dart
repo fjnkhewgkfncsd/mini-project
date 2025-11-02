@@ -17,7 +17,7 @@ class Doctor {
     required this.department,
   });
 
-  Doctor info({
+  Doctor withUpdates({
     String? id,
     String? name,
     String? specialization,

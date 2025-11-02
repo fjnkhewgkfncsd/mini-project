@@ -3,10 +3,10 @@ import '../datasources/doctorDataSource.dart';
 import '../../domain/models/doctor.dart';
 import '../mappers/doctorMapper.dart';
 
-class DoctorRepositoryImple implements IDoctorRepository{
+class DoctorRepositoryImpl implements IDoctorRepository {
   final DoctorDataSource _doctorDataSource;
 
-  DoctorRepositoryImple(this._doctorDataSource);
+  DoctorRepositoryImpl(this._doctorDataSource);
 
   @override
   Future<Doctor?> getById(String id) async {
@@ -31,7 +31,7 @@ class DoctorRepositoryImple implements IDoctorRepository{
   }
 
   @override
-  Future<void> delete(String id) async{
+  Future<void> delete(String id) async {
     await _doctorDataSource.deleteDoctor(id);
   }
 
@@ -41,9 +41,9 @@ class DoctorRepositoryImple implements IDoctorRepository{
     return DoctorMapper.toDomainList(listEntity);
   }
 
-  // @override
-  // Future<List<Doctor>?> getAvailableDoctors(DateTime date) async {
-  //   final listEntity = await _doctorDataSource.getAvailableDoctors(date);
-  //   return DoctorMapper.toDomainList(listEntity);
-  // }
+  @override
+  Future<List<Doctor>?> getAvailableDoctors(DateTime date) async {
+    final listEntity = await _doctorDataSource.getAvailableDoctors(date);
+    return DoctorMapper.toDomainList(listEntity);
+  }
 }

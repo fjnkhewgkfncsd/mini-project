@@ -1,6 +1,6 @@
 import '../../domain/interfaces/irepository.dart';
 import '../mappers/appointmentMapper.dart';
-import '../datasources/appointmetDataSourse.dart';
+import '../datasources/appointmentDataSource.dart';
 import '../../domain/models/appointment.dart';
 
 class AppointmentRepositoryImpl implements IAppointmentRepository {

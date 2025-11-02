@@ -17,7 +17,7 @@ class Room {
     this.schedule = const {},
   });
 
-  Room info({
+  Room withUpdates({
     String? id,
     String? roomNumber,
     String? type,

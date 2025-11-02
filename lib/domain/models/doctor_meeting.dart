@@ -24,7 +24,7 @@ class DoctorMeeting {
     required this.meetingType,
   });
 
-  DoctorMeeting info({
+  DoctorMeeting withUpdates({
     String? id,
     String? doctorId,
     String? title,
