@@ -4,7 +4,7 @@ class Patient {
   final int age;
   final String gender;
   final int phoneNumber;
-  final String medicalHistory;//list<String>
+  final List<String> medicalHistory;
 
   Patient({
     required this.id,
@@ -15,13 +15,13 @@ class Patient {
     required this.medicalHistory,
   });
 
-  Patient info({
+  Patient withUpdates({
     String? id,
     String? name,
     int? age,
     String? gender,
     int? phoneNumber,
-    String? medicalHistory,
+    List<String>? medicalHistory,
   }) {
     return Patient(
       id: id ?? this.id,

@@ -21,7 +21,7 @@ class Appointment {
     required this.status,
   });
 
-  Appointment info({
+  Appointment withUpdates({
     String? id,
     String? patientId,
     String? doctorId,

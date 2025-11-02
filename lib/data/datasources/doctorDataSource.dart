@@ -1,4 +1,4 @@
-import '../models//doctor.dart';
+import '../models/doctor.dart';
 import './jsonFileHandler.dart';
 
 class DoctorDataSource{
@@ -86,9 +86,15 @@ class DoctorDataSource{
         doctor.specialization.toLowerCase().contains(searchTerm)).toList();
   }
 
-  // Future<List<DoctorEntity>> getAvailableDoctors(DateTime date) async {
-  //   final allDoctors = await getAllDoctors();
-  //   return allDoctors.where((doctor) => 
-  //       doctor.isAvailable(date)).toList();
-  // }
+  @override
+  Future<List<DoctorEntity>> getAvailableDoctors(DateTime date) async {
+    final allDoctors = await getAllDoctors();
+    
+    // Simple implementation - filter doctors available on weekdays
+    return allDoctors.where((doctor) {
+      final dayOfWeek = date.weekday;
+      // Doctors are available Monday to Friday (1 = Monday, 5 = Friday)
+      return dayOfWeek >= DateTime.monday && dayOfWeek <= DateTime.friday;
+    }).toList();
+  }
 }

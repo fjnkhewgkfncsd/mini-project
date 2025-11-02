@@ -7,6 +7,15 @@ class DoctorMeetingRepositoryImpl implements IMeetingRepository {
   final MeetingDataSource _meetingDataSource;
 
   DoctorMeetingRepositoryImpl(this._meetingDataSource);
+   @override
+  Future<DoctorMeeting?> getById(String id) async {
+    try {
+      final entity = await _meetingDataSource.getMeetingById(id);
+      return entity == null ? null : MeetingMapper.toDomain(entity);
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   Future<List<DoctorMeeting>> getAll() async {

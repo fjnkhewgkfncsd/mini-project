@@ -1,26 +1,30 @@
 import 'dart:io';
 import 'dart:convert';
-class JsonHandler{
+
+class JsonHandler {
   static const String _path = "../jsonfiles/";
 
   Future<Map<String, dynamic>> readJsonFile(String fileName) async {
-    try{
-      final file = File('$_path$fileName.json');
-      if(!file.existsSync()){
-        return getDefaultStructure(fileName);
-      }
-      final content = await file.readAsStringSync();
-      return json.decode(content);
-    }catch(e){
-      throw Exception('Error reading JSON file: $e');
+    final file = File(
+      '${Directory.current.path}${Platform.pathSeparator}jsonfiles${Platform.pathSeparator}$fileName.json',
+    );
+    if (!await file.exists()) {
+      throw Exception('JSON file not found: ${file.path}');
     }
+    final contents = await file.readAsString();
+    return Map<String, dynamic>.from(jsonDecode(contents) as Map);
   }
 
   Future<void> writeJsonFile(String fileName, Map<String, dynamic> data) async {
+    // Use a jsonfiles directory under the current working directory (project root when run from root)
+    final dir = Directory(
+      '${Directory.current.path}${Platform.pathSeparator}jsonfiles',
+    );
+    await dir.create(recursive: true);
+    final file = File('${dir.path}${Platform.pathSeparator}$fileName.json');
+
     try {
-      final file = File('$_path$fileName.json');
-      final content = json.encode(data);
-      await file.writeAsString(content);
+      await file.writeAsString(jsonEncode(data), flush: true);
     } catch (e) {
       throw Exception('Error writing JSON file: $e');
     }
@@ -30,6 +34,7 @@ class JsonHandler{
     final file = File('$_path$fileName.json');
     return file.exists();
   }
+
   Map<String, dynamic> getDefaultStructure(String fileName) {
     if (fileName.startsWith('patients_chunk_')) {
       final chunkId = fileName.replaceAll('patients_chunk_', '');
@@ -40,7 +45,7 @@ class JsonHandler{
         'createdAt': DateTime.now().toIso8601String(),
       };
     }
-    
+
     switch (fileName) {
       case 'patient_index':
         return {'index': {}, 'totalPatients': 0, 'totalChunks': 0};
