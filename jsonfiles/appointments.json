@@ -1,1 +1,1 @@
-{"appointments":[{"id":"APT-1","patientId":"PAT-1","doctorId":"DOC-1","status":"scheduled","dateTime":"2025-11-04T02:49:36.925468","reason":"Heart checkup"}]}
+{"appointments":[{"id":"APT-1762172388092","patientId":"PAT-1762171718275","doctorId":"DOC-1762172086489","status":"cancelled","dateTime":"2025-11-04T10:00:00.000","reason":"nv nirk ke"},{"id":"APT-1762192349404","patientId":"PAT-1762177029930","doctorId":"DOC-1762172086489","status":"scheduled","dateTime":"2025-11-05T10:00:00.000","reason":"healthy check"}]}

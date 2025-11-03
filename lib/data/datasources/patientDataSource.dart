@@ -86,6 +86,7 @@ class PatientDataSource {
     final patientsList = targetChunkData['patients'] as List;
     final newIndexInChunk = patientsList.length;
     patientsList.add(patient.toJson());
+    targetChunkData['count'] = (targetChunkData['count'] as int) + 1;
     indexMap[patient.id] = {
       'chunkId': targetChunkId,
       'indexInChunk': newIndexInChunk,
@@ -109,6 +110,7 @@ class PatientDataSource {
     if (patientInfo == null) throw Exception('Patient not found');
     final chunkId = patientInfo['chunkId'] as int;
     final chunkData = await _readChunk(chunkId);
+    chunkData['count'] = (chunkData['count'] as int) - 1;
     final patientsList = chunkData['patients'] as List;
     final patientIndex = patientInfo['indexInChunk'] as int;
     patientsList.removeAt(patientIndex);

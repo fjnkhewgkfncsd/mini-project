@@ -11,7 +11,7 @@ class MeetingService {
     required IMeetingRepository meetingRepository,
     required IDoctorRepository doctorRepository,
   }) : _meetingRepository = meetingRepository,
-       _doctorRepository = doctorRepository;
+      _doctorRepository = doctorRepository;
 
   /// Schedule a new doctor meeting
   Future<DoctorMeeting> scheduleMeeting({

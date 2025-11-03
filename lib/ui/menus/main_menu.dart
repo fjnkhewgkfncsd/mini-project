@@ -41,14 +41,14 @@ class MainMenu {
           print('Thank you for using Hospital Management System. Goodbye! 👋');
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
   }
 
   void _showMenu() {
-    print('''
+    stdout.write('''
 === MAIN MENU ===
 1. Manage Patients
 2. Manage Doctors  
@@ -77,7 +77,7 @@ Choose an option: ''');
     final totalPatients = patients.length;
     final totalDoctors = doctors.length;
 
-    print('📊 Hospital Overview:');
+    print(' Hospital Overview:');
     print('   Total Patients: $totalPatients');
     print('   Total Doctors: $totalDoctors');
 

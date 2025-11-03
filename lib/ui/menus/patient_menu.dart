@@ -13,7 +13,7 @@ class PatientMenu {
 
     while (true) {
       DisplayHelpers.clearScreen();
-      print('''
+      stdout.write('''
 === PATIENT MANAGEMENT ===
 1. View All Patients
 2. Add New Patient
@@ -39,7 +39,7 @@ Choose an option: ''');
         case '5':
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
@@ -47,18 +47,18 @@ Choose an option: ''');
 
   Future<void> _viewAllPatients(dynamic patientService) async {
     DisplayHelpers.clearScreen();
-    print('=== ALL PATIENTS ===');
+    print('       === ALL PATIENTS ===');
 
     final patients = await patientService.getAllPatients();
     if (patients.isEmpty) {
       print('No patients found.');
     } else {
       for (final p in patients) {
-        print('- ${p.name} (${p.id})');
+        print('- ID : ${p.id}, Name : ${p.name}');
       }
     }
 
-    print('\nPress Enter to continue...');
+    stdout.write('\nPress Enter to continue...');
     stdin.readLineSync();
   }
 
@@ -92,10 +92,10 @@ Choose an option: ''');
         phoneNumber: int.tryParse(phone) ?? 0,
         medicalHistory: medicalHistory,
       );
-
-      print('✅ Patient added: ${patient.name} (ID: ${patient.id})');
+      print('Patient added successfully');
+      print('ID : ${patient.id}, Name : ${patient.name}');
     } catch (e) {
-      print('❌ Error: $e');
+      print('Error: $e');
     }
 
     stdin.readLineSync();
@@ -112,7 +112,7 @@ Choose an option: ''');
       print('No patients found matching "$query"');
     } else {
       for (final patient in results) {
-        print('${patient.id}: ${patient.name}, ${patient.age} years');
+        print('ID : ${patient.id}, Name : ${patient.name}, Age : ${patient.age} years');
       }
     }
 
@@ -132,7 +132,7 @@ Choose an option: ''');
       }
 
       for (final p in patients) {
-        print('- ${p.id}: ${p.name}');
+        print('- ID : ${p.id}, Name: ${p.name}');
       }
 
       final id = InputHelpers.getRequiredString('Enter Patient ID to delete: ');
@@ -147,9 +147,9 @@ Choose an option: ''');
       }
 
       await patientService.deletePatient(id);
-      print('✅ Patient deleted: $id');
+      print('Patient deleted: $id');
     } catch (e) {
-      print('❌ Error: $e');
+      print('Error: $e');
     }
 
     stdin.readLineSync();

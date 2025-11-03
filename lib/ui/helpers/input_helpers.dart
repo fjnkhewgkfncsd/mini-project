@@ -3,7 +3,7 @@ import 'dart:io';
 class InputHelpers {
   static String getRequiredString(String prompt) {
     while (true) {
-      print(prompt);
+      stdout.write(prompt);
       final input = stdin.readLineSync()?.trim() ?? '';
       if (input.isNotEmpty) return input;
       print('❌ This field is required.');
@@ -11,13 +11,13 @@ class InputHelpers {
   }
   
   static String getString(String prompt) {
-    print(prompt);
+    stdout.write(prompt);
     return stdin.readLineSync()?.trim() ?? '';
   }
   
   static int getPositiveInt(String prompt) {
     while (true) {
-      print(prompt);
+      stdout.write(prompt);
       final input = stdin.readLineSync()?.trim() ?? '';
       try {
         final value = int.parse(input);
