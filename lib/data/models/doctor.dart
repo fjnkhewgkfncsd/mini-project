@@ -1,10 +1,10 @@
-class DoctorEntity{
+class DoctorEntity {
   final String id;
   final String name;
   final String specialization;
   final String phoneNumber;
-  final int yearsOfExperience;
   final String email;
+  final int yearsOfExperience;
   final String department;
 
   const DoctorEntity({
@@ -40,9 +40,4 @@ class DoctorEntity{
       department: json['department'] as String,
     );
   }
-  
-  // bool isAvailable(Datetime date){
-  //   if(date.isAfter(DateTime.now())) return true;
-  //   else return false;
-  // }
 }

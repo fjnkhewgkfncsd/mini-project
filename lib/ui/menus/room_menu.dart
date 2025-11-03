@@ -1,7 +1,7 @@
 import 'dart:io';
 import '../helpers/input_helpers.dart';
 import '../helpers/display_helpers.dart';
-
+import '../../domain/models/room.dart';
 class RoomMenu {
   final Map<String, dynamic> dependencies;
 
@@ -49,7 +49,7 @@ Choose an option: ''');
 
     final repos = dependencies['repositories'];
     final roomRepo = repos['room'];
-    final rooms = await (roomRepo.getAll() ?? <dynamic>[]);
+    final rooms = await roomRepo.getAll() ?? <Room>[];
 
     if (rooms.isEmpty) {
       print('No rooms found.');
@@ -58,6 +58,7 @@ Choose an option: ''');
         print('${room.id}: Room ${room.roomNumber}');
         print('   Type: ${room.type} | Department: ${room.department}');
         print('   Floor: ${room.floor} | Available: ${room.isAvailable}');
+        print('   Schedule: ${room.schedule.length} bookings');
         print('---');
       }
     }
@@ -124,7 +125,7 @@ Choose an option: ''');
     // Show available rooms
     final repos = dependencies['repositories'];
     final roomRepo = repos['room'];
-    final rooms = await (roomRepo.getAll() ?? <dynamic>[]);
+    final rooms = await roomRepo.getAll() ?? <Room>[];
 
     print('Available Rooms:');
     for (final room in rooms) {

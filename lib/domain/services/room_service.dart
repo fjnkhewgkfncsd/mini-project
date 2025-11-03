@@ -49,6 +49,7 @@ class RoomService {
       department: department,
       floor: floor,
       isAvailable: true,
+      schedule: {},  // Add empty schedule for new rooms
     );
 
     await _roomRepository.add(room);
@@ -118,7 +119,7 @@ class RoomService {
       throw Exception('Room is not available at the requested time');
     }
 
-    final updatedSchedule = Map<DateTime, String>.from(room.schedule ?? {});
+    final updatedSchedule = Map<DateTime, String>.from(room.schedule);
     updatedSchedule[dateTime] = appointmentId;
 
     final updatedRoom = room.withUpdates(schedule: updatedSchedule);
@@ -132,7 +133,7 @@ class RoomService {
       throw Exception('Room not found: $roomId');
     }
 
-    final updatedSchedule = Map<DateTime, String>.from(room.schedule ?? {});
+    final updatedSchedule = Map<DateTime, String>.from(room.schedule);
     updatedSchedule.remove(dateTime);
 
     final updatedRoom = room.withUpdates(schedule: updatedSchedule);

@@ -8,15 +8,17 @@ class JsonHandler {
     final file = File(
       '${Directory.current.path}${Platform.pathSeparator}jsonfiles${Platform.pathSeparator}$fileName.json',
     );
+    
     if (!await file.exists()) {
-      throw Exception('JSON file not found: ${file.path}');
+      // Return default structure instead of throwing exception
+      return getDefaultStructure(fileName);
     }
+    
     final contents = await file.readAsString();
     return Map<String, dynamic>.from(jsonDecode(contents) as Map);
   }
 
   Future<void> writeJsonFile(String fileName, Map<String, dynamic> data) async {
-    // Use a jsonfiles directory under the current working directory (project root when run from root)
     final dir = Directory(
       '${Directory.current.path}${Platform.pathSeparator}jsonfiles',
     );
@@ -51,6 +53,14 @@ class JsonHandler {
         return {'index': {}, 'totalPatients': 0, 'totalChunks': 0};
       case 'patients':
         return {'patients': []};
+      case 'doctors':
+        return {'doctors': []};
+      case 'rooms':
+        return {'rooms': []};
+      case 'appointments':
+        return {'appointments': []};
+      case 'meetings':
+        return {'meetings': []};
       default:
         return {fileName: []};
     }

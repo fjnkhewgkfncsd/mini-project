@@ -12,9 +12,9 @@ class Room {
     required this.roomNumber,
     required this.type,
     required this.department,
-    this.isAvailable = true,
+    required this.isAvailable,
     required this.floor,
-    this.schedule = const {},
+    required this.schedule,
   });
 
   Room withUpdates({
@@ -40,13 +40,11 @@ class Room {
   bool isAvailableAt(DateTime dateTime) {
     return isAvailable && !schedule.containsKey(dateTime);
   }
-  void bookRoom(DateTime dateTime, String appointmentId) {
-    schedule[dateTime] = appointmentId;
-  }
-
-  void releaseRoom(DateTime dateTime) {
-    schedule.remove(dateTime);
-  }
 
   String get displayInfo => 'Room $roomNumber - $floor ($type)';
+
+  @override
+  String toString() {
+    return 'Room(id: $id, roomNumber: $roomNumber, type: $type, department: $department)';
+  }
 }

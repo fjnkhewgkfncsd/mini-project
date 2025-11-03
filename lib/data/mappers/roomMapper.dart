@@ -1,9 +1,14 @@
-// data/mappers/room_mapper.dart
 import '../../domain/models/room.dart';
 import '../models/room.dart';
 
 class RoomMapper {
   static Room toDomain(RoomEntity entity) {
+    // Convert schedule from String keys to DateTime keys
+    final schedule = <DateTime, String>{};
+    entity.schedule.forEach((key, value) {
+      schedule[DateTime.parse(key)] = value;
+    });
+
     return Room(
       id: entity.id,
       roomNumber: entity.roomNumber,
@@ -11,11 +16,17 @@ class RoomMapper {
       department: entity.department,
       isAvailable: entity.isAvailable,
       floor: entity.floor,
-      schedule: _convertScheduleToDateTime(entity.schedule),
+      schedule: schedule,
     );
   }
 
   static RoomEntity toEntity(Room domain) {
+    // Convert schedule from DateTime keys to String keys
+    final schedule = <String, String>{};
+    domain.schedule.forEach((key, value) {
+      schedule[key.toIso8601String()] = value;
+    });
+
     return RoomEntity(
       id: domain.id,
       roomNumber: domain.roomNumber,
@@ -23,7 +34,7 @@ class RoomMapper {
       department: domain.department,
       isAvailable: domain.isAvailable,
       floor: domain.floor,
-      schedule: _convertScheduleToString(domain.schedule),
+      schedule: schedule,
     );
   }
 
@@ -33,15 +44,5 @@ class RoomMapper {
 
   static List<RoomEntity> toEntityList(List<Room> domains) {
     return domains.map((domain) => toEntity(domain)).toList();
-  }
-
-  static Map<DateTime, String> _convertScheduleToDateTime(Map<String, String> stringSchedule) {
-    return stringSchedule.map((key, value) => 
-        MapEntry(DateTime.parse(key), value));
-  }
-
-  static Map<String, String> _convertScheduleToString(Map<DateTime, String> dateTimeSchedule) {
-    return dateTimeSchedule.map((key, value) => 
-        MapEntry(key.toIso8601String(), value));
   }
 }
