@@ -1,4 +1,4 @@
-class RoomEntity{
+class RoomEntity {
   final String id;
   final String roomNumber;
   final String type;
@@ -17,19 +17,28 @@ class RoomEntity{
     required this.schedule,
   });
 
-  Map<String, dynamic> toJson(){
-    return{
+  Map<String, dynamic> toJson() {
+    return {
       'id': id,
       'roomNumber': roomNumber,
       'type': type,
       'department': department,
       'isAvailable': isAvailable,
       'floor': floor,
-      'schedule': schedule
+      'schedule': schedule,
     };
   }
 
-  factory RoomEntity.fromJson(Map<String, dynamic> json){
+  factory RoomEntity.fromJson(Map<String, dynamic> json) {
+    // Properly convert the schedule from Map<String, dynamic> to Map<String, String>
+    final scheduleMap = <String, String>{};
+    if (json['schedule'] != null) {
+      final dynamicSchedule = json['schedule'] as Map<String, dynamic>;
+      dynamicSchedule.forEach((key, value) {
+        scheduleMap[key] = value.toString();
+      });
+    }
+
     return RoomEntity(
       id: json['id'] as String,
       roomNumber: json['roomNumber'] as String,
@@ -37,7 +46,7 @@ class RoomEntity{
       department: json['department'] as String,
       isAvailable: json['isAvailable'] as bool,
       floor: json['floor'] as String,
-      schedule: json['schedule'] as Map<String, String>
+      schedule: scheduleMap, // Use the properly converted map
     );
   }
 }
