@@ -15,7 +15,7 @@ class DoctorMenu {
 
     while (true) {
       DisplayHelpers.clearScreen();
-      print('''
+      stdout.write('''
 === DOCTOR MANAGEMENT ===
 1. View All Doctors
 2. Add New Doctor
@@ -46,7 +46,7 @@ Choose an option: ''');
         case '6':
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
@@ -61,7 +61,7 @@ Choose an option: ''');
       print('No doctors found.');
     } else {
       for (final d in doctors) {
-        print('- Dr. ${d.name} (${d.specialization})');
+        print('- Name: Dr. ${d.name} , ${d.specialization}');
       }
     }
     stdin.readLineSync();
@@ -92,9 +92,9 @@ Choose an option: ''');
         department: department,
       );
 
-      print('✅ Doctor added: Dr. ${doctor.name} (ID: ${doctor.id})');
+      print('Doctor added: Dr. ${doctor.name} (ID: ${doctor.id})');
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
@@ -112,7 +112,7 @@ Choose an option: ''');
     } else {
       print('Search Results:');
       for (final doctor in results) {
-        print('${doctor.id}: Dr. ${doctor.name} - ${doctor.specialization}');
+        print('ID : ${doctor.id}: Name : Dr. ${doctor.name} - ${doctor.specialization}');
       }
     }
 
@@ -134,7 +134,7 @@ Choose an option: ''');
       print('Doctors in $specialization:');
       for (final doctor in doctors) {
         print(
-          '${doctor.id}: Dr. ${doctor.name} - ${doctor.yearsOfExperience} years experience',
+          'ID : ${doctor.id}, Name: Dr. ${doctor.name} - ${doctor.yearsOfExperience} years experience',
         );
       }
     }
@@ -152,7 +152,7 @@ Choose an option: ''');
     final doctors = await (doctorRepo.getAll() ?? <dynamic>[]);
     print('Available Doctors:');
     for (final doctor in doctors) {
-      print('${doctor.id}: Dr. ${doctor.name} - ${doctor.specialization}');
+      print('ID : ${doctor.id}, Name : Dr. ${doctor.name} - ${doctor.specialization}');
     }
 
     final doctorId = InputHelpers.getRequiredString('Enter Doctor ID: ');
@@ -177,12 +177,12 @@ Choose an option: ''');
       );
 
       if (isAvailable) {
-        print('✅ Doctor is AVAILABLE at the requested time');
+        print(' Doctor is AVAILABLE at the requested time');
       } else {
-        print('❌ Doctor is NOT AVAILABLE at the requested time');
+        print(' Doctor is NOT AVAILABLE at the requested time');
       }
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
@@ -192,7 +192,7 @@ Choose an option: ''');
     while (true) {
       final email = InputHelpers.getRequiredString('Enter email: ');
       if (email.contains('@')) return email;
-      print('❌ Please enter a valid email address.');
+      print(' Please enter a valid email address.');
     }
   }
 }

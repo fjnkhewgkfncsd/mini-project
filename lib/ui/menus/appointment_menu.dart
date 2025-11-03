@@ -10,7 +10,7 @@ class AppointmentMenu {
   Future<void> show() async {
     while (true) {
       DisplayHelpers.clearScreen();
-      print('''
+      stdout.write('''
 === APPOINTMENT MANAGEMENT ===
 1. View All Appointments
 2. Schedule Appointment
@@ -37,7 +37,7 @@ Choose an option: ''');
         case '5':
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
@@ -68,7 +68,7 @@ Choose an option: ''');
           '   Date: ${appointment.dateTime} | Reason: ${appointment.reason}',
         );
         print('   Status: ${appointment.status}');
-        print('---');
+        print('-------');
       }
     }
 
@@ -88,7 +88,7 @@ Choose an option: ''');
       print('Available Patients:');
       final patients = await (patientRepo.getAll() ?? <dynamic>[]);
       for (final patient in patients) {
-        print('${patient.id}: ${patient.name}');
+        print('ID :${patient.id}, Name: ${patient.name}');
       }
 
       final patientId = InputHelpers.getRequiredString('Enter Patient ID: ');
@@ -119,10 +119,10 @@ Choose an option: ''');
         reason: reason,
       );
 
-      print('✅ Appointment scheduled: ${appointment.id}');
+      print(' Appointment scheduled: ${appointment.id}');
       print('   Date: ${appointment.dateTime} | Status: ${appointment.status}');
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
@@ -163,6 +163,8 @@ Choose an option: ''');
 
   Future<void> _cancelAppointment() async {
     DisplayHelpers.clearScreen();
+    await _viewAllAppointments();
+
     print('=== CANCEL APPOINTMENT ===');
 
     try {

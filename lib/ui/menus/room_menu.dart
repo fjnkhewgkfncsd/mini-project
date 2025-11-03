@@ -10,7 +10,7 @@ class RoomMenu {
   Future<void> show() async {
     while (true) {
       DisplayHelpers.clearScreen();
-      print('''
+      stdout.write('''
 === ROOM MANAGEMENT ===
 1. View All Rooms
 2. Add New Room
@@ -37,7 +37,7 @@ Choose an option: ''');
         case '5':
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
@@ -55,7 +55,7 @@ Choose an option: ''');
       print('No rooms found.');
     } else {
       for (final room in rooms) {
-        print('${room.id}: Room ${room.roomNumber}');
+        print('ID ${room.id}, Room  : ${room.roomNumber}');
         print('   Type: ${room.type} | Department: ${room.department}');
         print('   Floor: ${room.floor} | Available: ${room.isAvailable}');
         print('   Schedule: ${room.schedule.length} bookings');
@@ -86,9 +86,9 @@ Choose an option: ''');
         floor: floor,
       );
 
-      print('✅ Room added: Room ${room.roomNumber} (ID: ${room.id})');
+      print(' Room added: Room ${room.roomNumber} (ID: ${room.id})');
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
@@ -154,12 +154,12 @@ Choose an option: ''');
       final isAvailable = await roomService.isRoomAvailable(roomId, dateTime);
 
       if (isAvailable) {
-        print('✅ Room is AVAILABLE at the requested time');
+        print(' Room is AVAILABLE at the requested time');
       } else {
-        print('❌ Room is NOT AVAILABLE at the requested time');
+        print(' Room is NOT AVAILABLE at the requested time');
       }
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();

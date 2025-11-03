@@ -10,7 +10,7 @@ class MeetingMenu {
   Future<void> show() async {
     while (true) {
       DisplayHelpers.clearScreen();
-      print('''
+      stdout.write('''
 === MEETING MANAGEMENT ===
 1. View All Meetings
 2. Schedule Meeting
@@ -37,7 +37,7 @@ Choose an option: ''');
         case '5':
           return;
         default:
-          print('❌ Invalid option!');
+          print(' Invalid option!');
           stdin.readLineSync();
       }
     }
@@ -59,7 +59,7 @@ Choose an option: ''');
       for (final meeting in meetings) {
         final doctor = await doctorRepo.getById(meeting.doctorId);
 
-        print('${meeting.id}: ${meeting.title}');
+        print('Meeting ID : ${meeting.id}, title : ${meeting.title}');
         print(
           '   Organizer: Dr. ${doctor?.name ?? "Unknown"} | Type: ${meeting.meetingType}',
         );
@@ -83,7 +83,7 @@ Choose an option: ''');
       print('Available Doctors:');
       final doctors = await (doctorRepo.getAll() ?? <dynamic>[]);
       for (final doctor in doctors) {
-        print('${doctor.id}: Dr. ${doctor.name}');
+        print('ID : ${doctor.id}, Name: Dr. ${doctor.name}');
       }
 
       final doctorId = InputHelpers.getRequiredString(
@@ -118,10 +118,10 @@ Choose an option: ''');
         participantDoctorIds: <String>[],
       );
 
-      print('✅ Meeting scheduled: ${meeting.title}');
+      print(' Meeting scheduled: ${meeting.title}');
       print('   Time: ${meeting.startTime} to ${meeting.endTime}');
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
@@ -145,7 +145,7 @@ Choose an option: ''');
       for (final meeting in meetings) {
         final doctor = await doctorRepo.getById(meeting.doctorId);
 
-        print('${meeting.id}: ${meeting.title}');
+        print('Meeting ID : ${meeting.id}, title : ${meeting.title}');
         print(
           '   Organizer: Dr. ${doctor?.name ?? "Unknown"} | Time: ${meeting.startTime}',
         );
@@ -158,8 +158,12 @@ Choose an option: ''');
 
   Future<void> _cancelMeeting() async {
     DisplayHelpers.clearScreen();
+    final meetings = await dependencies['repositories']['meeting'].getAll() ?? [];
+    print('=== List of Meeting ===');
+    for (final meeting in meetings) {
+      print(' ID : ${meeting.id} title: ${meeting.title} at ${meeting.startTime}');
+    }
     print('=== CANCEL MEETING ===');
-
     try {
       final meetingId = InputHelpers.getRequiredString(
         'Enter Meeting ID to cancel: ',
@@ -172,9 +176,9 @@ Choose an option: ''');
       final meetingService = services['meeting'];
 
       await meetingService.cancelMeeting(meetingId, reason);
-      print('✅ Meeting cancelled successfully');
+      print(' Meeting cancelled successfully');
     } catch (e) {
-      print('❌ Error: $e');
+      print(' Error: $e');
     }
 
     stdin.readLineSync();
