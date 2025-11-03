@@ -73,7 +73,6 @@ class PatientDataSource {
     if (indexMap.containsKey(patient.id)) {
       throw Exception('Patient with id ${patient.id} already exists.');
     }
-
     int targetChunkId = index['totalChunks'] as int;
     Map<String, dynamic> targetChunkData;
     if (targetChunkId == 0 || await _isChunkFull(targetChunkId)) {
@@ -82,7 +81,6 @@ class PatientDataSource {
     } else {
       targetChunkData = await _readChunk(targetChunkId);
     }
-
     targetChunkData['patients'] =
         (targetChunkData['patients'] as List? ?? <dynamic>[]);
     final patientsList = targetChunkData['patients'] as List;

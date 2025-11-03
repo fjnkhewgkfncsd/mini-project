@@ -44,7 +44,6 @@ class PatientService {
       phoneNumber: phoneNumber,
       medicalHistory: medicalHistory,
     );
-
     await _patientRepository.add(patient);
     return patient;
   }

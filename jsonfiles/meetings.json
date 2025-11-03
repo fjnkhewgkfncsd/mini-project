@@ -1,1 +1,1 @@
-{"meetings":[{"id":"MTG-1762107366199","doctorId":"DOC-1762099471811","title":"sad","description":"ghosted","startTime":"2025-11-05T15:16:06.195088","endTime":"2025-11-05T16:16:06.195088","participantIds":[],"meetingType":"staff_meeting"}]}
+{"meetings":[{"id":"MTG-1","doctorId":"DOC-1","title":"Cardiology Department Meeting","description":"Weekly department review","startTime":"2025-11-05T12:50:32.333128","endTime":"2025-11-05T13:50:32.333128","participantIds":["DOC-2"],"meetingType":"staff_meeting"}]}

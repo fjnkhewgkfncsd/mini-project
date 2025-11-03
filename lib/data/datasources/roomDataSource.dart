@@ -23,14 +23,16 @@ class RoomDataSource {
   }
 
   Future<List<RoomEntity>> getAllRooms() async {
-    try {
+    try{
       final data = await _jsonHandler.readJsonFile(_fileName);
       final roomsList = data['rooms'] as List;
+      if(roomsList.isEmpty) return [];
       return roomsList.map((json) => RoomEntity.fromJson(json)).toList();
     } catch (e) {
       return [];
     }
   }
+  
 
   Future<void> addRoom(RoomEntity room) async {
     try {
