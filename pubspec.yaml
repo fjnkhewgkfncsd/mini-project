@@ -1,0 +1,11 @@
+name: hospital_management_system
+description: A Hospital Management System console application
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  # You can add other dependencies here later if needed
+
+dev_dependencies:
+  test: ^1.24.0
